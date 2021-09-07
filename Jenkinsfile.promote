@@ -1,0 +1,38 @@
+
+pipeline {
+    agent any
+    
+    environment {
+        UAT_REPO = 'staging-uat'
+        IQ_APPPLICATION = 'webgoat-bbc2'
+        IQ_APPPLICATION_ID = 'c669ad373d664b998bcb2d19ee092117' // get application id from this endpoint "curl --silent -u admin:admin123 -X GET http://localhost:<port>/api/v2/applications"
+        PROMOTE_DATA_FILE = './promote-data.json'
+    }
+
+    stages {
+        stage ('Promote components to UAT') {
+            steps {
+                script {
+                    
+                    // construct the meta data (Pipeline Utility Steps plugin)
+                    def promoteData = readJSON text: '{}' 
+                    promoteData.sourceStageId = "build" as String
+                    promoteData.targetStageId = "stage-release" as String
+                    
+                    writeJSON(file: "${PROMOTE_DATA_FILE}", json: promoteData, pretty: 4)
+                    sh 'cat ${PROMOTE_DATA_FILE}'                    
+                    
+                    sh "curl -u admin:admin123 -X POST -H 'Content-Type: application/json' -d  @${PROMOTE_DATA_FILE} http://localhost:8870/api/v2/evaluation/applications/${IQ_APPPLICATION_ID}/promoteScan"
+                }
+            }
+            post {
+                success {
+                    echo 'Now moving components to UAT repository...'
+                    moveComponents destination: "${UAT_REPO}", nexusInstanceId: 'nxrm3', tagName: "${TAG}"
+                    sh "/bin/rm ${PROMOTE_DATA_FILE}"
+                }
+            }
+        }
+    }
+}
+
