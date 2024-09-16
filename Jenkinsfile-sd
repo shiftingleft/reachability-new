@@ -29,7 +29,7 @@ pipeline {
                                             iqApplication: selectedApplication('webgoat-sd'), 
                                             iqScanPatterns: [[scanPattern: '**/*.war']], 
                                             iqStage: 'build', 
-                                            jobCredentialsId: 'nexus')
+                                            jobCredentialsId: 'Sonatype')
 
                 }
             }
