@@ -4,6 +4,7 @@ pipeline {
 
     environment {
         ARTEFACT_NAME = "${WORKSPACE}/target/WebGoat-${BUILD_VERSION}.war"
+        BUILD_VERSION = 1
         IQ_SCAN_URL = ""
     }
 
@@ -23,12 +24,12 @@ pipeline {
         stage('Nexus IQ Scan'){
             steps {
                 script{
-                     nexusPolicyEvaluation 
+                     nexusPolicyEvaluation( 
                                             failBuildOnNetworkError: true, 
                                             iqApplication: selectedApplication('webgoat-sd'), 
                                             iqScanPatterns: [[scanPattern: '**/*.war']], 
                                             iqStage: 'build', 
-                                            jobCredentialsId: 'nexus'
+                                            jobCredentialsId: 'nexus')
 
                 }
             }
