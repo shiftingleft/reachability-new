@@ -6,9 +6,10 @@ pipeline {
         ARTEFACT_NAME = "${WORKSPACE}/target/WebGoat-${BUILD_VERSION}.war"
         BUILD_VERSION = 1
         IQ_SCAN_URL = ""
+        IQ_STAGE = "build"
 
         // Amend these
-        IQ_APPNAME = "webgoat-sd"
+        IQ_APPNAME = "webgoat-sd2"
         JENKINS_CREDS_ID = "Sonatype"
     }
 
@@ -32,11 +33,18 @@ pipeline {
                                             failBuildOnNetworkError: true, 
                                             iqApplication: selectedApplication("${IQ_APPNAME}"), 
                                             iqScanPatterns: [[scanPattern: '**/*.war']], 
-                                            iqStage: 'build', 
+                                            iqStage: "${IQ_STAGE}", 
                                             jobCredentialsId: "${JENKINS_CREDS_ID}",
                                             callflow: [
-                                                enable: true
-                                            ]
+                                                enable: true,
+                                                failOnError: false,
+                                                timeout: '10 minutes',
+                                                logLevel: 'DEBUG',
+                                                entrypointStrategy: [
+                                                    $class: 'NamedStrategy',
+                                                    name: 'ACCESSIBLE_CONCRETE'
+                                                ]
+                        ]
                      )
                 }
             }
