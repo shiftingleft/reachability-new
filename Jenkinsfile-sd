@@ -33,7 +33,7 @@ pipeline {
                                             iqApplication: selectedApplication('webgoat-sd'), 
                                             iqScanPatterns: [[scanPattern: '**/*.war']], 
                                             iqStage: 'build', 
-                                            jobCredentialsId: 'Sonatype'),
+                                            jobCredentialsId: 'Sonatype',
                                             callflow: [
                                                 enable: true
                                             ]
