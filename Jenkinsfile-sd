@@ -6,6 +6,10 @@ pipeline {
         ARTEFACT_NAME = "${WORKSPACE}/target/WebGoat-${BUILD_VERSION}.war"
         BUILD_VERSION = 1
         IQ_SCAN_URL = ""
+
+        // Amend these
+        IQ_APPNAME = ""
+        JENKINS_CREDS_ID = "Sonatype"
     }
 
     stages {
@@ -26,10 +30,10 @@ pipeline {
                 script{
                      nexusPolicyEvaluation( 
                                             failBuildOnNetworkError: true, 
-                                            iqApplication: selectedApplication('webgoat-sd'), 
+                                            iqApplication: selectedApplication("${IQ_APPNAME}"), 
                                             iqScanPatterns: [[scanPattern: '**/*.war']], 
                                             iqStage: 'build', 
-                                            jobCredentialsId: 'Sonatype'),
+                                            jobCredentialsId: "${JENKINS_CREDS_ID}"),
                                             callflow: [
                                                 enable: true
                                             ]
