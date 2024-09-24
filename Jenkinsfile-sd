@@ -30,10 +30,10 @@ pipeline {
                 script{
                      nexusPolicyEvaluation( 
                                             failBuildOnNetworkError: true, 
-                                            iqApplication: selectedApplication('webgoat-sd'), 
+                                            iqApplication: selectedApplication("${IQ_APPNAME}"), 
                                             iqScanPatterns: [[scanPattern: '**/*.war']], 
                                             iqStage: 'build', 
-                                            jobCredentialsId: 'Sonatype'),
+                                            jobCredentialsId: "${JENKINS_CREDS_ID}",
                                             callflow: [
                                                 enable: true
                                             ]
