@@ -13,6 +13,10 @@ pipeline {
         JENKINS_CREDS_ID = "Sonatype"
     }
 
+    tools {
+        M3
+    }
+
     stages {
         stage('Build') {
             steps {
