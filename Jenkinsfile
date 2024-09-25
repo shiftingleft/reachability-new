@@ -41,9 +41,7 @@ pipeline {
                                             jobCredentialsId: "${JENKINS_CREDS_ID}",
                                             callflow: [
                                                 enable: true,
-                                                failOnError: false,
-                                                timeout: '10 minutes',
-                                                logLevel: 'DEBUG',
+                                                logLevel: 'INFO',
                                                 entrypointStrategy: [
                                                     $class: 'NamedStrategy',
                                                     name: 'ACCESSIBLE_CONCRETE'
