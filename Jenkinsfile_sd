@@ -40,7 +40,9 @@ pipeline {
                                             iqStage: "${IQ_STAGE}", 
                                             jobCredentialsId: "${JENKINS_CREDS_ID}",
                                             callflow: [
-                                                enable: true
+                                                enable: true,
+                                                logLevel: 'INFO',
+
                                             ]
                      )
                 }
