@@ -10,7 +10,7 @@ pipeline {
 
         // Amend these
         IQ_APPNAME = "webgoat-sd2"
-        JENKINS_CREDS_ID = "iqserver"
+        JENKINS_CREDS_ID = "Sonatype"
     }
 
     tools {
