@@ -40,8 +40,15 @@ pipeline {
                                             iqStage: "${IQ_STAGE}", 
                                             jobCredentialsId: "${JENKINS_CREDS_ID}",
                                             callflow: [
-                                                enable: true
-                                            ]
+                                                enable: true,
+                                                failOnError: false,
+                                                timeout: '10 minutes',
+                                                logLevel: 'DEBUG',
+                                                entrypointStrategy: [
+                                                    $class: 'NamedStrategy',
+                                                    name: 'ACCESSIBLE_CONCRETE'
+                                                ]
+                            ]
                      )
                 }
             }
