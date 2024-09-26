@@ -10,7 +10,7 @@ pipeline {
 
         // Amend these
         IQ_APPNAME = "callflow"
-        JENKINS_CREDS_ID = "iq_server"
+        JENKINS_CREDS_ID = "clm_server"
     }
 
     tools {
