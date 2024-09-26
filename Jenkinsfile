@@ -46,7 +46,10 @@ pipeline {
                                                 logLevel: 'INFO',
                                                 entrypointStrategy: [
                                                     $class: 'NamedStrategy',
-                                                    name: 'PUBLIC_CONCRETE'
+                                                    name: 'PUBLIC_CONCRETE',
+                                                    namespaces: [
+                                                            ''
+                                                    ]
                                         ]
                             ]
                      )
