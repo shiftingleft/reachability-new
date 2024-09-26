@@ -47,9 +47,6 @@ pipeline {
                                                 entrypointStrategy: [
                                                     $class: 'NamedStrategy',
                                                     name: 'PUBLIC_CONCRETE'
-                                                    namespaces: [
-			                                            ''
-                                                ]
                                         ]
                             ]
                      )
