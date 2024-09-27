@@ -17,19 +17,19 @@
         <build.number>local</build.number>
     </properties>
 
-	<!-- to download from nexus -->
-  	 <repositories>
-	    <repository>
-	      <id>nexus</id>
-	      <url>http://localhost:8081/repository/maven-central</url>
+    <!-- to download from nexus -->
+    <repositories>
+        <repository>
+        <id>nexus</id>
+            <url>http://localhost:8081/repository/maven-central</url>
 	      <releases>
-	         <enabled>true</enabled>
+		 <enabled>true</enabled>
 	      </releases>
 	      <snapshots>
-	         <enabled>true</enabled>
+		 <enabled>true</enabled>
 	      </snapshots>
 	    </repository>
-  	</repositories> 
+    </repositories> 
 
     <!-- to publish to nexus -->
     <distributionManagement>
@@ -45,7 +45,6 @@
     </distributionManagement>
 
     <build>
-    
         <resources>
             <resource>
                 <directory>${basedir}/src/main/java</directory>
@@ -55,9 +54,8 @@
             </resource>
         </resources>
         
-        <plugins>
-		
-		<!-- Nexus IQ -->
+        <plugins>	
+	<!-- Nexus IQ -->
         <!-- <plugin>
 	        <groupId>com.sonatype.clm</groupId>
 	        <artifactId>clm-maven-plugin</artifactId>
@@ -70,8 +68,6 @@
 	          <password>admin123</password>
 	        </configuration>
       	</plugin> -->
-        <!-- Nexus IQ -->
-		
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -102,7 +98,7 @@
                 </configuration>
             </plugin>
             
-						<!--
+	<!--
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
@@ -122,8 +118,7 @@
                     </execution>
                 </executions>
             </plugin>     
-						-->
-            
+	-->    
                    
         </plugins>
     </build>
@@ -257,7 +252,6 @@
             <version>7.0.27</version>
             <scope>provided</scope>
         </dependency>
-
 
         <!-- ************* spring MVC and related dependencies ************** -->
 
