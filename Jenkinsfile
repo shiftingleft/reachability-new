@@ -1,4 +1,3 @@
-
 pipeline {
     agent any
 
@@ -8,13 +7,12 @@ pipeline {
         IQ_SCAN_URL = ""
         IQ_STAGE = "build"
 
-        // Amend these
         IQ_APPNAME = ".Webgoat_CF"
         JENKINS_CREDS_ID = "iq"
     }
 
     tools {
-        maven 'M3'
+        maven 'Maven'
     }
 
     stages {
@@ -33,29 +31,29 @@ pipeline {
         stage('Nexus IQ Scan'){
             steps {
                 script{
-                     nexusPolicyEvaluation( 
-                                            failBuildOnNetworkError: true, 
-                                            iqApplication: selectedApplication("${IQ_APPNAME}"), 
-                                            iqScanPatterns: [[scanPattern: '**/*.war']], 
-                                            iqStage: "${IQ_STAGE}", 
-                                            jobCredentialsId: "${JENKINS_CREDS_ID}",
-                                            callflow: [
-                                                enable: true,
-                                                failOnError: false,
-                                                timeout: '10 minutes',
-                                                logLevel: 'INFO',
-                                                entrypointStrategy: [
-                                                    $class: 'NamedStrategy',
-                                                    name: 'JAVA_MAIN',
-                                                    namespaces: [
-                                                            ''
-                                                    ]
-                                        ]
+                    nexusPolicyEvaluation(
+                        failBuildOnNetworkError: true, 
+                        iqApplication: selectedApplication("${IQ_APPNAME}"), 
+                        iqScanPatterns: [[scanPattern: '**/*.war']], 
+                        iqStage: "${IQ_STAGE}", 
+                        jobCredentialsId: "${JENKINS_CREDS_ID}",
+                        callflow: [
+                            enable: true,
+                            failOnError: false,
+                            timeout: '10 minutes',
+                            logLevel: 'INFO',
+                            algorithm: 'RTA_PLUS',  // Add this line
+                            entrypointStrategy: [
+                                $class: 'NamedStrategy',
+                                name: 'JAVA_MAIN',
+                                namespaces: [
+                                    ''
+                                ]
                             ]
-                     )
+                        ]
+                    )
                 }
             }
         }
     }
 }
-
