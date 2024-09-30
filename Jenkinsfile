@@ -7,7 +7,7 @@ pipeline {
         IQ_SCAN_URL = ""
         IQ_STAGE = "build"
         IQ_APPNAME = ".Webgoat_CF"
-        JENKINS_CREDS_ID = "iqserver"
+        JENKINS_CREDS_ID = "iq"
     }
 
     tools {
