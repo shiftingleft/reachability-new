@@ -6,14 +6,12 @@ pipeline {
         BUILD_VERSION = 1
         IQ_SCAN_URL = ""
         IQ_STAGE = "build"
-
-        // Amend these
         IQ_APPNAME = ".Webgoat_CF"
-        JENKINS_CREDS_ID = "iq"
+        JENKINS_CREDS_ID = "iqserver"
     }
 
     tools {
-        maven 'M3'
+        maven 'Maven'
     }
 
     stages {
@@ -36,3 +34,24 @@ pipeline {
                         failBuildOnNetworkError: true,
                         iqApplication: selectedApplication("${IQ_APPNAME}"),
                         iqScanPatterns: [[scanPattern: '**/*.war']],
+                        iqStage: "${IQ_STAGE}",
+                        jobCredentialsId: "${JENKINS_CREDS_ID}",
+                        callflow: [
+                            enable: true,
+                            failOnError: false,
+                            timeout: '10 minutes',
+                            logLevel: 'INFO',
+                            entrypointStrategy: [
+                                $class: 'NamedStrategy',
+                                name: 'JAVA_MAIN',
+                                namespaces: [
+                                    ''
+                                ]
+                            ]
+                        ]
+                    )
+                }
+            }
+        }
+    }
+}
