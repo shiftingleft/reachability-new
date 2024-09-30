@@ -7,7 +7,7 @@ pipeline {
         IQ_SCAN_URL = ""
         IQ_STAGE = "build"
         IQ_APPNAME = ".Webgoat_CF"
-        JENKINS_CREDS_ID = "iq"
+        JENKINS_CREDS_ID = "iq" 
     }
 
     tools {
@@ -41,6 +41,7 @@ pipeline {
                             failOnError: false,
                             timeout: '10 minutes',
                             logLevel: 'INFO',
+                            algorithm: 'RTA_PLUS',  // Specify the algorithm as RTA_PLUS
                             entrypointStrategy: [
                                 $class: 'NamedStrategy',
                                 name: 'JAVA_MAIN',
