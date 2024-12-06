@@ -6,7 +6,8 @@ pipeline {
         BUILD_VERSION = 1
         IQ_SCAN_URL = ""
         IQ_STAGE = "build"
-        IQ_APPNAME = ".reachability-v2"
+        IQ_ORG_ID = "Github"
+        IQ_APPNAME = ".reachability-new"
         JENKINS_CREDS_ID = "iq" 
     }
 
